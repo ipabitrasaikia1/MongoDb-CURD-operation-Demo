@@ -40,9 +40,9 @@ try {
 })
 
 
-app.get("/:movie_name",async (req,res)=>{
+app.get("/:id",async (req,res)=>{
     try {
-        const newMovie = await Movie.findById(req.params.movie_name).lean().exec()
+        const newMovie = await Movie.findById(req.params.id).lean().exec()
         return res.status(201).send(newMovie)  
     } catch (e) {
         return res.status(500).send({message : e.message, status : "failed" } )
@@ -58,6 +58,28 @@ app.post("/",async (req,res)=>{
         return res.send({messg : e.message})
     }
 })
+
+
+app.patch("/:id",async (req,res)=>{
+    try {
+        const newMovie = await Movie.findByIdAndUpdate(req.params.id,req.body,{new:true}).lean().exec()
+        return res.status(201).send("Movie Deleted")  
+    } catch (e) {
+        return res.status(500).send({message : e.message, status : "failed" } )
+    }
+       
+    })
+
+    app.delete("/:id",async (req,res)=>{
+        try {
+            const newMovie = await Movie.findByIdAndDelete()
+            return res.status(201).send(newMovie)  
+        } catch (e) {
+            return res.status(500).send({message : e.message, status : "failed" } )
+        }
+           
+        })
+    
 
 app.listen(5001,async ()=>{
    await connect()
