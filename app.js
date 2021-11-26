@@ -63,7 +63,7 @@ app.post("/",async (req,res)=>{
 app.patch("/:id",async (req,res)=>{
     try {
         const newMovie = await Movie.findByIdAndUpdate(req.params.id,req.body,{new:true}).lean().exec()
-        return res.status(201).send("Movie Deleted")  
+        return res.status(201).send(newMovie)  
     } catch (e) {
         return res.status(500).send({message : e.message, status : "failed" } )
     }
@@ -73,7 +73,7 @@ app.patch("/:id",async (req,res)=>{
     app.delete("/:id",async (req,res)=>{
         try {
             const newMovie = await Movie.findByIdAndDelete()
-            return res.status(201).send(newMovie)  
+            return res.status(201).send("Movie Deleted")  
         } catch (e) {
             return res.status(500).send({message : e.message, status : "failed" } )
         }
