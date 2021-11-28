@@ -1,0 +1,24 @@
+{
+  "name": "mongodb-curd-operation-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipabitrasaikia1/MongoDb-CURD-operation-Demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ipabitrasaikia1/MongoDb-CURD-operation-Demo/issues"
+  },
+  "homepage": "https://github.com/ipabitrasaikia1/MongoDb-CURD-operation-Demo#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13"
+  }
+}
