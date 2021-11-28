@@ -2,7 +2,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 
-const movies = require("./movie_db.json")
+const movies = require("../movie_db.json")
 
 const app = express();
 app.use(express.json())
