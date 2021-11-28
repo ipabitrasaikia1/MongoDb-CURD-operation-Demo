@@ -45,10 +45,10 @@ const Book = mongoose.model("book",bookSchema) ;
 
 const checkoutSchema = new mongoose.Schema({
   
-    user_id : {type : mongoose.Schema.Types.ObjectId, ref : "User",require : true} ,
-    section_id : {type : mongoose.Schema.Types.ObjectId, ref : "Section",require : true} ,
-    book_id : {type : mongoose.Schema.Types.ObjectId, ref : "Book",require : true} ,
-    author_id : {type : mongoose.Schema.Types.ObjectId, ref : "Author",require : true} 
+    user_id : {type : mongoose.Schema.Types.ObjectId, ref : "user",require : true} ,
+    section_id : {type : mongoose.Schema.Types.ObjectId, ref : "section",require : true} ,
+    book_id : {type : mongoose.Schema.Types.ObjectId, ref : "book",require : true} ,
+    author_id : {type : mongoose.Schema.Types.ObjectId, ref : "author",require : true} 
 },{versionKey:false,timestamps:true}) 
 
 const Chekout = mongoose.model("checkout",checkoutSchema) ;
@@ -277,6 +277,60 @@ app.delete("/authors/:id",async (req,res)=>{
    
 }) 
 
+//---- Creating REST api for Checkout ---//
+
+app.get("/checkout",async (req,res)=>{ 
+    try {
+        const users = await Chekout.find().populate("user_id").populate("author_id").populate("section_id").populate("book_id") ;
+        return res.status(201).send(users)
+        
+    } catch (e) {
+        return res.send({"message" : e.message})
+    }
+   
+}) 
+app.get("/checkout/:id",async (req,res)=>{ 
+    try {
+        const user = await Chekout.findById().populate("user_id").populate("author_id").populate("section_id").populate("book_id").lean().exec() ;
+        return res.status(201).send(user)
+        
+    } catch (e) {
+        return res.send({"message" : e.message})
+    }
+   
+}) 
+app.post("/checkout",async (req,res)=>{ 
+    try {
+        const user = await Chekout.create(req.body)
+        return res.status(201).send(user)
+        
+    } catch (e) {
+        return res.send({"message" : e.message})
+    }
+   
+}) 
+
+app.patch("/checkout/:id",async (req,res)=>{ 
+    try {
+        const user = await Chekout.findByIdAndUpdate(req.params.id,req.body,{new : true}) ;
+        return res.status(201).send(user)
+        
+    } catch (e) {
+        return res.send({"message" : e.message})
+    }
+   
+}) 
+
+app.delete("/checkout/:id",async (req,res)=>{ 
+    try {
+        const user = await Chekout.findByIdAndDelete(req.params.id) ;
+        return res.status(201).send("Deleted")
+        
+    } catch (e) {
+        return res.send({"message" : e.message})
+    }
+   
+}) 
 
 
 
