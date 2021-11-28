@@ -333,10 +333,6 @@ app.delete("/checkout/:id",async (req,res)=>{
 }) 
 
 
-
-
-
-
 app.listen(5002,async()=>{
     await connect();
     console.log("Port ready at 5002")
