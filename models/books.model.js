@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
+
 const Section = require("./section.model")
 const Author = require("./author.model") 
+
 const bookSchema = new mongoose.Schema({
     "name" : {type : String , required : true},
     
